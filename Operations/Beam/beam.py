@@ -1,16 +1,13 @@
 import math
+from Operations.Statics.forces import Force
 
 
 
-class beam:
-
-    def __init__(self):
-        self.toTalPositiveForces = 0
-        self.totalNegativeForces = 0
-
+class Beam:
 
     # forces added for the function must be the absolute value and faces one direction
-    def toTalPositiveForces(*args):
+    @staticmethod
+    def totalVerticalPositiveForces(*args):
         totalPositiveForces = 0
 
         for value in range(len(args)):
@@ -18,11 +15,33 @@ class beam:
 
         return totalPositiveForces
 
-
-    def toTalNegativeForces(*args):
+    @staticmethod
+    def totalVerticalNegativeForces(*args):
         totalNegativeForces = 0
 
         for value in range(len(args)):
             totalNegativeForces += float(args[value])
 
         return totalNegativeForces
+
+    @staticmethod
+    def totalHorizontalPositiveForces(*args):
+        totalPostitiveForces = 0
+
+        for value in range(len(args)):
+            totalPostitiveForces += float(args[value])
+
+        return totalPostitiveForces
+
+    @staticmethod
+    def totalHorizontalNegativeForces(*args):
+        totalNegativeForces = 0
+
+        for value in range(len(args)):
+            totalNegativeForces += float(args[value])
+
+        return totalNegativeForces
+
+    @staticmethod
+    def Moment(force, distance):
+        return force * distance
