@@ -3,9 +3,14 @@ import math
 
 
 class beam:
+
+    def __init__(self):
+        self.toTalPositiveForces = 0
+        self.totalNegativeForces = 0
+
+
     # forces added for the function must be the absolute value and faces one direction
-    @staticmethod
-    def positiveForces(*args):
+    def toTalPositiveForces(*args):
         totalPositiveForces = 0
 
         for value in range(len(args)):
@@ -13,8 +18,8 @@ class beam:
 
         return totalPositiveForces
 
-    @staticmethod
-    def negativeForces(*args):
+
+    def toTalNegativeForces(*args):
         totalNegativeForces = 0
 
         for value in range(len(args)):
