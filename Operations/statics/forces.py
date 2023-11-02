@@ -1,26 +1,15 @@
 import math
 
 
-class Forces:
-    @staticmethod
-    # forces added for the function must be the absolute value and faces one direction
-    def positiveForces(*args):
-        totalPositiveForces = 0
+class Force:
+    def __init__(self, magnitude, distance):
+        self.magnitude = float(magnitude)
+        self.distance = float(distance)
 
-        for value in range(len(args)):
-            totalPositiveForces += float(args[value])
+    def forceMagnitude(self):
+        # magnitude =  scalar value of force
+        return self.magnitude
 
-        return totalPositiveForces
-
-    @staticmethod
-    def negativeForces(*args):
-        totalNegativeForces = 0
-
-        for value in range(len(args)):
-            totalNegativeForces += float(args[value])
-
-        return totalNegativeForces
-
-
-
-
+    def forceDistance(self):
+        # distance = distance from (0,0) origin in cartesian plane
+        return self.distance

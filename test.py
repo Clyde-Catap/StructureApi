@@ -1,9 +1,5 @@
-from Operations.statics.forces import Forces
+from Operations.statics.forces import Force
 
-force = Forces()
-
-w = force.positiveForces(2, 3)
-
-
-
-print(w)
+force1 = Force(2,3)
+qqq = force1.distance
+print(qqq)
