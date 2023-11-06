@@ -1,8 +1,3 @@
-import math
-from Operations.Statics.forces import Force
-
-
-
 class Beam:
 
     # forces added for the function must be the absolute value and faces one direction
