@@ -1,5 +1,6 @@
 from Operations.Statics.Forces.singlepointforce import SinglePointForce
 from Operations.Statics.Forces.uniformloadforce import UniformLoadForce
+from Operations.Statics.Forces.triangleloadforce import TriangleLoadForce
 from sympy import symbols, solve, Eq
 
 
@@ -10,6 +11,8 @@ class BeamSolver:
         # Reaction 1 : Reaction at Origin  = R1
         # Reaction 2 : Reaction at End = R2
         # Load : Single point Load = P
+        # X1 : Distance of origin to centroid of load
+        # X2 : Remaining distance form centroid of load to end
 
         R1, R2 = symbols('R1 R2')
         P = single_point_load.magnitude
@@ -23,7 +26,7 @@ class BeamSolver:
         # # Moment at origin
         Mo = Eq(P*X1, R2*L)
 
-        Reactions = solve((SumV,Mo), (R1, R2))
+        Reactions = solve((SumV, Mo), (R1, R2))
 
         return Reactions
 
@@ -32,6 +35,8 @@ class BeamSolver:
         # Reaction 1 : Reaction at Origin  = R1
         # Reaction 2 : Reaction at End = R2
         # Load : Uniform Load = U
+        # X1 : Distance of origin to centroid of load
+        # X2 : Remaining distance form centroid of load to end
 
         UR1, UR2 = symbols('R1 R2')
         # Uniform Load transformed to Single load
@@ -39,10 +44,11 @@ class BeamSolver:
         L = total_beam_length
         X1 = uniform_load.distance_to_centroid
         X2 = L - uniform_load.distance_to_centroid
-        # # Summation of forces vertical
+
+        # Summation of forces vertical
         SumV = Eq(UR1 + UR2, U)
 
-        # # Moment at origin
+        # Moment at origin
         Mo = Eq(U*X1, UR2*L)
 
         Reactions = solve((SumV, Mo), (UR1, UR2))
@@ -50,6 +56,48 @@ class BeamSolver:
 
         return Reactions
 
+
+
+    #VARIABLE LOADS
     @staticmethod
-    def variableLoadReactions(self):
+    def triangleLoadReactions(triangle_load: TriangleLoadForce, total_beam_length):
+        # Reaction 1 : Reaction at Origin  = R1
+        # Reaction 2 : Reaction at End = R2
+        # Load : Triangle Load = T
+        # X1 : Distance of origin to centroid of load
+        # X2 : Remaining distance form centroid of load to end
+
+        TR1, TR2 = symbols('R1 R2')
+        # Triangle Load transformed to Single load
+        T = (1 / 2) * triangle_load.length_of_load * triangle_load.load_magnitude
+        L = total_beam_length
+
+        if triangle_load.is_max_near_origin:
+
+            if triangle_load.length_of_load == L:
+                X1 = (1/3) * triangle_load.length_of_load
+
+            else:
+                X1 = triangle_load.distance_of_min_to_origin + ((1/3) * triangle_load.length_of_load)
+
+        if not triangle_load.is_max_near_origin:
+            if triangle_load.length_of_load == L:
+                X1 = (2/3) * triangle_load.length_of_load
+            else:
+                X1 = triangle_load.distance_of_min_to_origin + ((2/3) * triangle_load.length_of_load)
+
+
+        X2 = L - X1
+
+        # Summation of forces vertical
+        SumV = Eq(TR1 + TR2, T)
+
+        # Moment at origin
+        Mo = Eq(T*X1, TR2*L)
+
+        Reactions = solve((SumV, Mo), (TR1, TR2))
+
+        return Reactions
+    @staticmethod
+    def trapezoidalLoadReactions(self):
         return
