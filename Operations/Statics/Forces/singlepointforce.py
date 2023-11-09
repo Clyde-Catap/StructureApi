@@ -2,7 +2,7 @@ import math
 
 
 class SinglePointForce:
-    def __init__(self, magnitude, distance):
+    def __init__(self, magnitude: int | float, distance: int | float):
         self.magnitude = float(magnitude)
         self.distance = float(distance)
 
