@@ -1,42 +1,19 @@
-class Beam:
+from Operations.Solver import beamsolver as BS
 
-    # forces added for the function must be the absolute value and faces one direction
-    @staticmethod
-    def totalVerticalPositiveForces(*args):
-        totalPositiveForces = 0
 
-        for value in range(len(args)):
-            totalPositiveForces += float(args[value])
+class Beam(BS):
 
-        return totalPositiveForces
+    # Return Reactions and Moments present in beam
+    # def __init__(self, *args):
 
     @staticmethod
-    def totalVerticalNegativeForces(*args):
-        totalNegativeForces = 0
-
-        for value in range(len(args)):
-            totalNegativeForces += float(args[value])
-
-        return totalNegativeForces
+    def simplySupportedBeam(*forces):
+        return
 
     @staticmethod
-    def totalHorizontalPositiveForces(*args):
-        totalPostitiveForces = 0
-
-        for value in range(len(args)):
-            totalPostitiveForces += float(args[value])
-
-        return totalPostitiveForces
+    def fixedBeam():
+        return
 
     @staticmethod
-    def totalHorizontalNegativeForces(*args):
-        totalNegativeForces = 0
-
-        for value in range(len(args)):
-            totalNegativeForces += float(args[value])
-
-        return totalNegativeForces
-
-    @staticmethod
-    def Moment(force, distance):
-        return force * distance
+    def cantileverBeam():
+        return

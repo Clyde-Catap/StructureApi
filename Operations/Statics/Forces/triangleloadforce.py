@@ -5,7 +5,12 @@ import math
 
 class TriangleLoadForce:
 
-    def __init__(self, load_magnitude: int | float, length_of_load: int | float, distance_of_min_to_origin: int | float, distance_of_max_to_origin: int | float, is_max_near_origin: bool):
+    def __init__(self, load_magnitude: int | float,
+                 length_of_load: int | float,
+                 distance_of_min_to_origin: int | float,
+                 distance_of_max_to_origin: int | float,
+                 is_max_near_origin: bool):
+
         self.load_magnitude = float(load_magnitude)
         self.length_of_load = float(length_of_load)
         self.distance_of_min_to_origin = float(distance_of_min_to_origin)

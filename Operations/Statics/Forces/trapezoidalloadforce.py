@@ -6,7 +6,13 @@ from sympy import symbols, solve, Eq
 
 class TrapezoidalLoadForce:
 
-    def __init__(self, load_magnitude: int | float, distance_of_min_lower_load_to_origin: int | float, distance_of_max_lower_load_to_origin: int | float, distance_of_min_upper_load_to_origin: int | float, distance_of_max_upper_load_to_origin: int | float):
+    def __init__(self, load_magnitude: int | float,
+                 distance_of_min_lower_load_to_origin: int | float,
+                 distance_of_max_lower_load_to_origin: int | float,
+                 distance_of_min_upper_load_to_origin: int | float,
+                 distance_of_max_upper_load_to_origin: int | float):
+
+
         self.load_magnitude = float(load_magnitude)
         self.distance_of_min_lower_load_to_origin = float(distance_of_min_lower_load_to_origin)
         self.distance_of_max_lower_load_to_origin = float(distance_of_max_lower_load_to_origin)
