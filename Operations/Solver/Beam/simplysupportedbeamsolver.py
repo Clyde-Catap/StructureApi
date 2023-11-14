@@ -5,7 +5,7 @@ from Operations.Statics.Forces.trapezoidalloadforce import TrapezoidalLoadForce
 from sympy import symbols, solve, Eq
 
 
-class BeamSolver:
+class SimplySupportedBeamSolver:
 
     @staticmethod
     def singlePointLoadReactions(single_point_load: SinglePointForce, total_beam_length):

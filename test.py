@@ -1,10 +1,10 @@
-from Operations.Solver.beamsolver import BeamSolver
+from Operations.Solver.Beam.simplysupportedbeamsolver import SimplySupportedBeamSolver
 from Operations.Statics.Forces.singlepointforce import SinglePointForce
 from Operations.Statics.Forces.uniformloadforce import UniformLoadForce
 from Operations.Statics.Forces.triangleloadforce import TriangleLoadForce
 from Operations.Statics.Forces.trapezoidalloadforce import TrapezoidalLoadForce
 
-beam = BeamSolver()
+beam = SimplySupportedBeamSolver()
 SingleLoad = SinglePointForce(magnitude=6, distance=6)
 SingleLoadReactions = beam.singlePointLoadReactions(SingleLoad, 10)
 print(f"Single Point Load: {SingleLoadReactions}")

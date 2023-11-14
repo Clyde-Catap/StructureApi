@@ -1,4 +1,4 @@
-from Operations.Solver import beamsolver as BS
+from Operations.Solver.Beam import simplysupportedbeamsolver as BS
 
 
 class Beam(BS):
