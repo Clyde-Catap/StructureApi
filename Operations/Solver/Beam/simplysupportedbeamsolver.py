@@ -2,10 +2,12 @@ from Operations.Statics.Forces.singlepointforce import SinglePointForce
 from Operations.Statics.Forces.uniformloadforce import UniformLoadForce
 from Operations.Statics.Forces.triangleloadforce import TriangleLoadForce
 from Operations.Statics.Forces.trapezoidalloadforce import TrapezoidalLoadForce
+from Services.reactioncleaner import ReactionCleaner
 from sympy import symbols, solve, Eq
 
 
 class SimplySupportedBeamSolver:
+
 
     @staticmethod
     def singlePointLoadReactions(single_point_load: SinglePointForce, total_beam_length):
@@ -27,9 +29,9 @@ class SimplySupportedBeamSolver:
         # # Moment at origin
         Mo = Eq(P*X1, R2*L)
 
-        Reactions = solve((SumV, Mo), (R1, R2))
+        Reactions = solve((SumV, Mo), (R1, R2), dict=True)
 
-        return Reactions
+        return {"Reaction_at_origin": float(Reactions[0][R1]), "Reaction_at_end": float(Reactions[0][R2])}
 
     @staticmethod
     def uniformLoadReactions(uniform_load: UniformLoadForce, total_beam_length):
@@ -52,10 +54,10 @@ class SimplySupportedBeamSolver:
         # Moment at origin
         Mo = Eq(U*X1, UR2*L)
 
-        Reactions = solve((SumV, Mo), (UR1, UR2))
+        Reactions = solve((SumV, Mo), (UR1, UR2), dict=True)
 
 
-        return Reactions
+        return {"Reaction_at_origin": float(Reactions[0][UR1]), "Reaction_at_end": float(Reactions[0][UR2])}
 
 
 
@@ -96,11 +98,12 @@ class SimplySupportedBeamSolver:
         # Moment at origin
         Mo = Eq(T*X1, TR2*L)
 
-        Reactions = solve((SumV, Mo), (TR1, TR2))
+        Reactions = solve((SumV, Mo), (TR1, TR2), dict=True)
 
-        return Reactions
+        return {"Reaction_at_origin": float(Reactions[0][TR1]), "Reaction_at_end": float(Reactions[0][TR2])}
     @staticmethod
     def trapezoidalLoadReactions(trapezoidal_load: TrapezoidalLoadForce, total_beam_length):
+        cleaner = ReactionCleaner()
         # Reaction 1 : Reaction at Origin
         # Reaction 2 : Reaction at End
         # Load : Trapezoidal Load = T
@@ -120,6 +123,7 @@ class SimplySupportedBeamSolver:
         # Moment at origin
         Mo = Eq(T*X1, TPR2*L)
 
-        Reactions = solve((SumV, Mo), (TPR1, TPR2))
+        # Solve equation
+        Reactions = solve((SumV, Mo), (TPR1, TPR2), dict=True)
 
-        return Reactions
+        return {"Reaction_at_origin": float(Reactions[0][TPR1]), "Reaction_at_end": float(Reactions[0][TPR2])}
